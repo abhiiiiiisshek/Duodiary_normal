@@ -1,5 +1,5 @@
 'use client'
-
+// this is to confirm that git is pushing
 import AuthForm from '@/components/auth/auth-form'
 import { useEffect, useState } from 'react'
 
