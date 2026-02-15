@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { generateInviteCode, joinRelationship } from './actions'
 import { Loader2, Copy, Check } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export default function InviteSection({
     inviteCode,

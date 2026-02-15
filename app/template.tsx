@@ -1,17 +1,19 @@
 
 'use client'
 
-import { motion } from 'framer-motion'
-
 export default function Template({ children }: { children: React.ReactNode }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ ease: 'easeInOut', duration: 0.3 }}
+        <div
+            className="animate-fadeInUp"
+            style={{ animation: 'fadeInUp 0.3s ease-in-out forwards' }}
         >
+            <style>{`
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
             {children}
-        </motion.div>
+        </div>
     )
 }

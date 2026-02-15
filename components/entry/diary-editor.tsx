@@ -1,8 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
 import { updateEntry, deleteEntry } from '@/app/dashboard/actions'
 import { useRouter } from 'next/navigation'
 import { Loader2, Save, Trash2, Lock, Unlock, ArrowLeft, ArrowRight } from 'lucide-react'
@@ -103,11 +101,16 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
     const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+        <div
+            style={{ animation: 'fadeInUp 0.4s ease-out forwards' }}
             className="max-w-3xl mx-auto p-6"
         >
+            <style>{`
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-6 sticky top-0 bg-background/80 backdrop-blur-sm z-10 py-4 border-b">
                 <button
@@ -170,9 +173,8 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
 
             {/* Guest CTA */}
             {isGuest && content.length > 10 && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                <div
+                    style={{ animation: 'fadeInUp 0.4s ease-out forwards' }}
                     className="fixed bottom-8 left-0 right-0 flex justify-center px-4"
                 >
                     <button
@@ -182,7 +184,7 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
                         Save & Create Account
                         <ArrowRight className="h-4 w-4" />
                     </button>
-                </motion.div>
+                </div>
             )}
 
             {/* Footer Stats */}
@@ -190,6 +192,6 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
                 <span>{wordCount} words</span>
                 <span>{content.length} characters</span>
             </div>
-        </motion.div>
+        </div>
     )
 }

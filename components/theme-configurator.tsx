@@ -1,8 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useTheme } from '@/components/theme-provider'
-import { motion } from 'framer-motion'
 import { Check, Settings2, X } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
@@ -36,6 +34,12 @@ export function ThemeConfigurator() {
 
     return (
         <>
+            <style>{`
+                @keyframes scaleIn {
+                    from { opacity: 0; transform: scale(0.95); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+            `}</style>
             <button
                 onClick={() => setIsOpen(true)}
                 className="fixed bottom-4 right-4 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:scale-105 transition-transform z-50"
@@ -45,9 +49,8 @@ export function ThemeConfigurator() {
 
             {isOpen && (
                 <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                    <div
+                        style={{ animation: 'scaleIn 0.2s ease-out forwards' }}
                         className="bg-card w-full max-w-lg rounded-xl border shadow-xl p-6 relative overflow-y-auto max-h-[90vh]"
                     >
                         <button
@@ -109,7 +112,7 @@ export function ThemeConfigurator() {
                                 </button>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             )}
         </>

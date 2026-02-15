@@ -1,8 +1,6 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '@/lib/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Loader2, Mail, Lock, ArrowRight } from 'lucide-react'
@@ -21,7 +19,16 @@ export default function AuthForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
+    const [showError, setShowError] = useState(false)
     const router = useRouter()
+
+    useEffect(() => {
+        if (error) {
+            setShowError(true)
+        } else {
+            setShowError(false)
+        }
+    }, [error])
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -62,6 +69,12 @@ export default function AuthForm() {
 
     return (
         <div className="w-full max-w-md p-8 bg-card rounded-2xl shadow-xl border border-border/50 backdrop-blur-sm">
+            <style>{`
+                @keyframes slideDown {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
             <div className="mb-8 text-center">
                 <h2 className="text-3xl font-bold tracking-tight mb-2">
                     {isLogin ? 'Welcome Back' : 'Create Account'}
@@ -100,18 +113,14 @@ export default function AuthForm() {
                     </div>
                 </div>
 
-                <AnimatePresence>
-                    {error && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="text-destructive text-sm text-center bg-destructive/10 p-2 rounded-md"
-                        >
-                            {error}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {showError && error && (
+                    <div
+                        style={{ animation: 'slideDown 0.3s ease-out forwards' }}
+                        className="text-destructive text-sm text-center bg-destructive/10 p-2 rounded-md"
+                    >
+                        {error}
+                    </div>
+                )}
 
                 <button
                     type="submit"
