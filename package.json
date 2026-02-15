@@ -11,19 +11,20 @@
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.39.0",
-    "clsx": "^2.0.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/extension-placeholder": "^2.27.2",
+    "@tiptap/extension-typography": "^2.27.2",
+    "@tiptap/pm": "^2.27.2",
+    "@tiptap/react": "^2.27.2",
+    "@tiptap/starter-kit": "^2.27.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^10.18.0",
     "gsap": "^3.12.2",
     "lucide-react": "^0.292.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^2.0.0",
-    "framer-motion": "^10.16.4",
-    "@tiptap/react": "^2.10.3",
-    "@tiptap/starter-kit": "^2.10.3",
-    "@tiptap/extension-placeholder": "^2.10.3",
-    "@tiptap/extension-typography": "^2.10.3",
-    "@tiptap/pm": "^2.10.3"
+    "tailwind-merge": "^2.6.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
