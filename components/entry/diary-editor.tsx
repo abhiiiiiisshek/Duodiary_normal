@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { Loader2, Save, Trash2, Lock, Unlock, ArrowLeft, ArrowRight, Bold, Italic, Strikethrough, Heading1, Heading2, List, ListOrdered, Quote, Undo, Redo } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from 'next-themes'
+import { Editor } from '@tiptap/react'
 
 interface Entry {
     id: string
@@ -23,7 +23,7 @@ interface DiaryEditorProps {
     isGuest?: boolean
 }
 
-const MenuBar = ({ editor }: { editor: any }) => {
+const MenuBar = ({ editor }: { editor: Editor | null }) => {
     if (!editor) return null
 
     const items = [
@@ -136,7 +136,6 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
     const [charCount, setCharCount] = useState(0)
 
     const router = useRouter()
-    const { theme } = useTheme()
 
     const editor = useEditor({
         extensions: [
@@ -152,7 +151,7 @@ export default function DiaryEditor({ entry, isGuest = false }: DiaryEditorProps
                 class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[300px]',
             },
         },
-        onUpdate: ({ editor }) => {
+        onUpdate: ({ editor }: { editor: Editor }) => {
             const html = editor.getHTML()
             const text = editor.getText()
             setWordCount(text.trim() ? text.trim().split(/\s+/).length : 0)
